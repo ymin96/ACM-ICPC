@@ -2,7 +2,7 @@ def find(parent, x):
     if x == parent[x]:
         return x
     else:
-        y = find(parent,parent[x])
+        y = find(parent, parent[x])
         parent[x] = y
         return y
 
