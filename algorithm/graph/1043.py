@@ -28,12 +28,14 @@ for i in range(m):
     temp = list(map(int, input().split()))[1:]
     for j in temp:
         people[j].append(i + 1)
-for i in range(1, len(people)):
-    for j in range(len(people[i]) - 1):
-        union(room, people[i][j], people[i][j + 1])
+for k in range(m):
+    for i in range(1, len(people)):
+        for j in range(len(people[i]) - 1):
+            union(room, people[i][j], people[i][j + 1])
 lst = []
 for i in truth:
-    lst.append(find(room, i))
+    if len(people[i]) > 0:
+        lst.append(find(room, people[i][0]))
 ans = 0
 for i in range(1, len(room)):
     if lst.count(room[i]) == 0:
