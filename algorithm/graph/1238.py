@@ -1,5 +1,6 @@
 import heapq
 
+
 def dijkstra(start):
     global distance, graph
     que = []
@@ -14,17 +15,23 @@ def dijkstra(start):
             cost = distance[node] + next[1]
             if cost < distance[next[0]]:
                 distance[next[0]] = cost
-                heapq.heappush(que, (cost, next[0]))
+                heapq.heappush(que, [cost, next[0]])
 
 
-n = int(input())
-m = int(input())
 INF = 9999999999999
+n, m, x = map(int, input().split())
 graph = [[] for i in range(n + 1)]
 distance = [INF] * (n + 1)
+answer = [0 for i in range(n + 1)]
 for i in range(m):
-    start, end, dist = map(int, input().split())
-    graph[start].append([end, dist])
-start, end = map(int, input().split())
-dijkstra(start)
-print(distance[end])
+    s, e, d = map(int, input().split())
+    graph[s].append([e, d])
+for i in range(1, n + 1):
+    distance = [INF] * (n + 1)
+    dijkstra(i)
+    if i != x:
+        answer[i] += distance[x]
+    else:
+        for j in range(1, n + 1):
+            answer[j] += distance[j]
+print(max(answer))
